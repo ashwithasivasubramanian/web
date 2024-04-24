@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Details</title>
+    <style>
+        body {
+            background-image: url("https://thumbs.dreamstime.com/z/juice-bar-background-concept-fresh-exotic-fruits-wall-juicing-fresh-pomegranates-juice-bar-background-concept-fresh-exotic-fruits-182223389.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #billDetails {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div id="billDetails">
+        <h1>Bill Details</h1>
+        <div id="billItems"></div>
+        <h4>Total Bill: <span id="totalBill"></span></h4>
+    </div>
+
+    <script>
+        // Retrieve the stored data from localStorage
+        var billDetails = JSON.parse(localStorage.getItem('billDetails'));
+
+        // Display the bill details
+        if (billDetails) {
+            var billItemsHTML = '<ul>';
+            for (var i = 0; i < billDetails.itemNames.length; i++) {
+                billItemsHTML += '<li>' + billDetails.itemNames[i] + ' - Price: ' + billDetails.prices[i] + ', Quantity: ' + billDetails.quantities[i] + '</li>';
+            }
+            billItemsHTML += '</ul>';
+
+            document.getElementById('billItems').innerHTML = billItemsHTML;
+            document.getElementById('totalBill').textContent = billDetails.total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
